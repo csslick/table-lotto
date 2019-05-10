@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>자리추첨</title>
+    <style>
+        * { 
+box-sizing: border-box; 
+}
+#sensei{
+  text-align: center;
+  width: 10em;
+  padding: 5px;
+  background: #f80;
+  color: #fff;
+  font-weigjt: bold;
+}
+ul{
+  padding: 0;
+}
+li { list-style-type: none; }
+#table li {
+  float: left;
+  width: 16.66%;
+  border: 1px solid #666;
+  padding: 10px 5px;
+  text-align: center;
+  color: rgba(0,0,0,0);
+  transition: 5s;
+}
+#table li.show{
+  color: rgba(0,0,0,1);
+}
+#table li:nth-child(1){
+  transition-delay: 0s;
+}
+#table li:nth-child(2){
+  transition-delay: 4s;
+}
+#table li:nth-child(3){
+  transition-delay: 6s;
+}
+#table li:nth-child(4){
+  transition-delay:4s;
+}
+#table li:nth-child(5){
+  transition-delay: 6s;
+}
+#table li:nth-child(6){
+  transition-delay: 8s;
+}
+#table li:nth-child(7){
+  transition-delay: 10s;
+}
+#table li:nth-child(8){
+  transition-delay: 4;
+}
+#table li:nth-child(9){
+  transition-delay: 12s;
+}
+#table li:nth-child(10){
+  transition-delay: 14s;
+}
+#table li:nth-child(11){
+  transition-delay: 10s;
+}
+#table li:nth-child(12){
+  transition-delay: 16s;
+}
+#table li:nth-child(13){
+  transition-delay: 6s;
+}
+#table li:nth-child(14){
+  transition-delay: 14s;
+}
+#table li:nth-child(15){
+  transition-delay: 20s;
+}
+#table li:nth-child(16){
+  transition-delay: 16s;
+}
+#table li:nth-child(17){
+  transition-delay: 22s;
+}
+#table li:nth-child(18){
+  transition-delay: 18s;
+}
+
+li:nth-child(6n){
+  margin-bottom: 20px;
+}
+#table :not(.none) { background: #ccc; }
+
+#go{
+    display: block;
+    width: 100%;
+  padding: 10px 20px;
+  font-size: 2em;
+  border: none;
+  background: #0088ff;
+  color: white;
+}
+
+    </style>
+</head>
+<body>
+    <div id="sensei">교탁</div>
+    <ul id='table'>
+      <li class="none">1박성희</li>
+      <li class="none">2</li>
+      <li class="">3</li>
+      <li class="">4</li>
+      <li class="none">5</li>
+      <li class="">6</li>
+      <li class="">7</li>
+      <li class="none">8</li>
+      <li class="">9</li>
+      <li class="">10</li>
+      <li class="none">11</li>
+      <li class="">12</li>
+      <li class="none">13</li>
+      <li class="">14</li>
+      <li class="">15</li>
+      <li class="none">16</li>
+      <li class="">17</li>
+      <li class="none">18</li>
+    </ul>
+    
+    <button id="go">자리추첨 go</button>   
+
+    <script>
+    var data = [
+    0,0,0,0,0,0,
+    0,0,0,0,0,0,
+    0,0,0,0,0,0,
+]
+
+var person = [
+	'박은화','이하나','박해연','배정학','김슬기',
+  '이호민','정주희','이선호','김영재','한혜원',
+]
+var total = person.length;
+
+console.log(data.length)
+  let r = Math.floor(Math.random()*total)
+  data[0] = person[r]
+  
+for (var i = 1; i < total; i++){
+  r = Math.floor(Math.random()*total)
+    console.log('r: ' + person[r])
+    
+  for(var j = 0; j <= i-1; j++){
+    if(data[j] == person[r]){
+      i=i-1;
+      console.log('중복 발생! ' + data[j] + person[r])
+      break;
+    } else{
+        data[i] = person[r]
+    }
+  }
+
+}
+console.log(data)
+
+console.log(data.sort(function(a, b){return a - b}));
+
+/* let _table = document.querySelecterAll("#table li"); */
+var _table = document.getElementById('table')
+var li = _table.getElementsByTagName('li');
+
+var data_key = 0;
+for(let i = 0; i < data.length - 1; i++){
+	var is_none = li[i].getAttribute('class');
+  console.log(is_none)
+  if(is_none !== 'none') {
+  	li[i].innerText = data[data_key]
+    data_key++;
+  }
+  console.log(i)
+}
+
+
+let go = document.getElementById('go');
+
+function addPersonList(){
+    for(var i = 0; li.length - 1; i++){
+        li[i].classList.add('show');	
+    }
+}
+go.addEventListener('click', function(){
+    addPersonList();
+})
+
+
+    </script>
+</body>
+</html>
